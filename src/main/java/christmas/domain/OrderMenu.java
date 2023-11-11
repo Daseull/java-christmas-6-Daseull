@@ -39,4 +39,8 @@ public class OrderMenu {
             throw new PlannerException(ErrorMessage.INVALID_ORDER_MESSAGE);
         }
     }
+
+    public Map<Menu, Integer> getOrderMenu() {
+        return orderMenu;
+    }
 }
