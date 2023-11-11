@@ -5,6 +5,8 @@ import static christmas.domain.menu.Category.BEVERAGE;
 import static christmas.domain.menu.Category.DESSERT;
 import static christmas.domain.menu.Category.MAIN;
 
+import java.util.Arrays;
+
 public enum Menu {
     MUSHROOM_SOUP(APPETIZER, "양송이수프", 6_000),
     TAPAS(APPETIZER, "타파스", 5_500),
@@ -30,6 +32,11 @@ public enum Menu {
         this.category = category;
         this.description = description;
         this.price = price;
+    }
+
+    public static boolean exists(String description) {
+        return Arrays.stream(Menu.values())
+                .anyMatch(m -> description.equals(m.description()));
     }
 
     public Category category() {
