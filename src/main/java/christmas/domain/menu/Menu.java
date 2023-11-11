@@ -39,6 +39,12 @@ public enum Menu {
                 .anyMatch(m -> description.equals(m.description()));
     }
 
+    public static Menu fromDescription(String description) {
+        return Arrays.stream(Menu.values())
+                .filter(m -> description.equals(m.description))
+                .findAny().get();
+    }
+
     public Category category() {
         return category;
     }
