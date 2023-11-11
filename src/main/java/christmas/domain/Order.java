@@ -6,6 +6,7 @@ import christmas.domain.menu.Menu;
 import christmas.exception.ErrorMessage;
 import christmas.exception.PlannerException;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class Order {
     private final Map<Menu, Integer> orderMenu;
@@ -35,5 +36,15 @@ public class Order {
         if (sum > Constant.MAX_ORDER_COUNT) {
             throw new PlannerException(ErrorMessage.INVALID_ORDER_MESSAGE);
         }
+    }
+
+    public int totalPrice() {
+        return orderMenu.entrySet().stream()
+                .mapToInt(this::itemPrice)
+                .sum();
+    }
+
+    private int itemPrice(Entry<Menu, Integer> item) {
+        return item.getKey().price() * item.getValue();
     }
 }
