@@ -1,4 +1,7 @@
-package christmas.domain;
+package christmas.domain.event;
+
+import christmas.domain.Date;
+import christmas.domain.Order;
 
 public class DDayDiscount implements EventPolicy {
     private static final int FIRST_DATE = 1;

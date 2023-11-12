@@ -1,4 +1,7 @@
-package christmas.domain;
+package christmas.domain.event;
+
+import christmas.domain.Date;
+import christmas.domain.Order;
 
 public interface EventPolicy {
     int MIN_TOTAL_PRICE = 10_000;

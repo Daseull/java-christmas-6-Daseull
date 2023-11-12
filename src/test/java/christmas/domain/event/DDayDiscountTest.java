@@ -1,7 +1,11 @@
-package christmas.domain;
+package christmas.domain.event;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import christmas.domain.Date;
+import christmas.domain.Order;
+import christmas.domain.event.DDayDiscount;
+import christmas.domain.event.EventPolicy;
 import christmas.domain.menu.Menu;
 import java.util.EnumMap;
 import java.util.Map;

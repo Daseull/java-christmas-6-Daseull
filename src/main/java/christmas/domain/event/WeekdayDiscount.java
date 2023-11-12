@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.event;
 
 import static java.time.DayOfWeek.MONDAY;
 import static java.time.DayOfWeek.SUNDAY;
@@ -6,6 +6,8 @@ import static java.time.DayOfWeek.THURSDAY;
 import static java.time.DayOfWeek.TUESDAY;
 import static java.time.DayOfWeek.WEDNESDAY;
 
+import christmas.domain.Date;
+import christmas.domain.Order;
 import christmas.domain.menu.Category;
 import java.time.DayOfWeek;
 import java.util.List;

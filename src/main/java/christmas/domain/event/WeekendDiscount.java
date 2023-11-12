@@ -1,8 +1,10 @@
-package christmas.domain;
+package christmas.domain.event;
 
 import static java.time.DayOfWeek.FRIDAY;
 import static java.time.DayOfWeek.SATURDAY;
 
+import christmas.domain.Date;
+import christmas.domain.Order;
 import christmas.domain.menu.Category;
 import java.time.DayOfWeek;
 import java.util.List;

@@ -1,8 +1,10 @@
-package christmas.domain;
+package christmas.domain.event;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
+import christmas.domain.Date;
+import christmas.domain.Order;
+import christmas.domain.event.WeekendDiscount;
 import christmas.domain.menu.Menu;
 import java.util.EnumMap;
 import java.util.Map;

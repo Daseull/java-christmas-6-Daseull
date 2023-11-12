@@ -1,5 +1,7 @@
-package christmas.domain;
+package christmas.domain.event;
 
+import christmas.domain.Date;
+import christmas.domain.Order;
 import java.util.List;
 
 public class SpecialDiscount implements EventPolicy {
