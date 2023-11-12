@@ -47,4 +47,11 @@ public class Order {
     private int itemPrice(Entry<Menu, Integer> item) {
         return item.getKey().price() * item.getValue();
     }
+
+    public int countByCategory(Category category) {
+        return (int) orderMenu.keySet().stream()
+                .filter(key -> category.equals(key.category()))
+                .mapToInt(orderMenu::get)
+                .sum();
+    }
 }
