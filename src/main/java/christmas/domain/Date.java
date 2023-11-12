@@ -22,7 +22,7 @@ public class Date {
     }
 
     public int dayFromDate(int other) {
-        return date - other + 1;
+        return date - other;
     }
 
     public DayOfWeek dayOfWeek() {
