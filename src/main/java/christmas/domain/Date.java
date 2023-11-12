@@ -21,15 +21,19 @@ public class Date {
         }
     }
 
-    public int getDate() {
-        return date;
+    public int dayFromDate(int other) {
+        return date - other + 1;
     }
 
     public DayOfWeek dayOfWeek() {
         return LocalDate.of(Constant.EVENT_YEAR, Constant.EVENT_MONTH, date).getDayOfWeek();
     }
 
-    public boolean isIncluded(List<Integer> dates){
+    public boolean isIncluded(List<Integer> dates) {
         return dates.contains(date);
+    }
+
+    public boolean isInRange(int startInclusive, int endInclusive) {
+        return startInclusive <= date && date <= endInclusive;
     }
 }
