@@ -15,7 +15,7 @@ public class WeekdayDiscount implements EventPolicy {
 
     @Override
     public boolean canBeApplied(Date date, Order order) {
-        return isApplicableOrder(order) && isWeekDay(date);
+        return isApplicableOrder(order) && isWeekday(date.dayOfWeek());
     }
 
     @Override
@@ -26,8 +26,8 @@ public class WeekdayDiscount implements EventPolicy {
         return 0;
     }
 
-    private boolean isWeekDay(Date date) {
-        List<DayOfWeek> weekDay = List.of(SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY);
-        return weekDay.contains(date.dayOfWeek());
+    private boolean isWeekday(DayOfWeek dayOfWeek) {
+        List<DayOfWeek> weekday = List.of(SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY);
+        return weekday.contains(dayOfWeek);
     }
 }
