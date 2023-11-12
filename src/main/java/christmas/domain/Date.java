@@ -5,6 +5,7 @@ import christmas.exception.ErrorMessage;
 import christmas.exception.PlannerException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Date {
     private int date;
@@ -20,7 +21,15 @@ public class Date {
         }
     }
 
+    public int getDate() {
+        return date;
+    }
+
     public DayOfWeek dayOfWeek() {
         return LocalDate.of(Constant.EVENT_YEAR, Constant.EVENT_MONTH, date).getDayOfWeek();
+    }
+
+    public boolean isIncluded(List<Integer> dates){
+        return dates.contains(date);
     }
 }

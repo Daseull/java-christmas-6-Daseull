@@ -8,6 +8,7 @@ import christmas.Constant;
 import christmas.exception.ErrorMessage;
 import christmas.exception.PlannerException;
 import java.time.DayOfWeek;
+import java.util.List;
 import java.util.stream.IntStream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -40,5 +41,15 @@ class DateTest {
         DayOfWeek dayOfWeek = new Date(date).dayOfWeek();
 
         assertThat(dayOfWeek.name()).isEqualTo(expected);
+    }
+
+    @DisplayName("특정날들에 해당 날짜가 포함되는지 테스트")
+    @ParameterizedTest
+    @CsvSource({"1,true", "25,false"})
+    void isIncluded(int dateSource, boolean expected){
+        Date date = new Date(dateSource);
+        List<Integer> dates = List.of(1, 2);
+
+        assertThat(date.isIncluded(dates)).isEqualTo(expected);
     }
 }
