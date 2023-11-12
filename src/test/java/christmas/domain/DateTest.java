@@ -65,7 +65,7 @@ class DateTest {
 
     @DisplayName("해당 날짜가 특정날로부터 몇번째 날인지 구하는 기능 테스트")
     @ParameterizedTest
-    @CsvSource({"1,1,1", "31,25,7"})
+    @CsvSource({"1,1,0", "31,25,6"})
     void isInRange(int dateSource, int from, int expectedDay){
         Date date = new Date(dateSource);
 
