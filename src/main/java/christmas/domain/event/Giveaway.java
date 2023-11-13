@@ -16,6 +16,9 @@ public class Giveaway implements EventPolicy {
 
     @Override
     public int amount(Date date, Order order) {
-        return -1 * numGiveaway * giveaway.price();
+        if (canBeApplied(date, order)) {
+            return -1 * numGiveaway * giveaway.price();
+        }
+        return 0;
     }
 }

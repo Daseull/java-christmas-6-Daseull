@@ -8,7 +8,6 @@ import christmas.domain.menu.Menu;
 import java.util.EnumMap;
 import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -27,12 +26,13 @@ class GiveawayTest {
     }
 
     @DisplayName("할인 금액 테스트")
-    @Test
-    void amount() {
+    @ParameterizedTest
+    @CsvSource({"양송이수프,-25000", "타파스,0"})
+    void amount(String menu, int expectedAmount) {
         Map<Menu, Integer> menus = new EnumMap<Menu, Integer>(Menu.class);
-        menus.put(Menu.fromDescription("양송이수프"), 2);
+        menus.put(Menu.fromDescription(menu), 2);
 
         assertThat(giveaway.amount(new Date(1), new Order(menus)))
-                .isEqualTo(-25000);
+                .isEqualTo(expectedAmount);
     }
 }
