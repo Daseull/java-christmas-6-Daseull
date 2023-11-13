@@ -1,5 +1,6 @@
 package christmas.view;
 
+import christmas.controller.DiscountAmount;
 import christmas.controller.MenuCount;
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +23,7 @@ public class OutputView {
 
     public void printGiveaway(Optional<MenuCount> giveaway) {
         System.out.println("\n<증정 메뉴>");
-        if(giveaway.isPresent()){
+        if (giveaway.isPresent()) {
             MenuCount menuCount = giveaway.get();
             printMenuCount(menuCount.menu(), menuCount.count());
             return;
@@ -30,7 +31,16 @@ public class OutputView {
         System.out.println("없음");
     }
 
-    private void printMenuCount(String menu, int count){
+    public void printBenefitDetails(List<DiscountAmount> discountAmounts) {
+        System.out.println("\n<혜택 내역>");
+        if (discountAmounts.isEmpty()) {
+            System.out.println("없음");
+            return;
+        }
+        discountAmounts.forEach(da -> System.out.printf("%s: %,d원\n", da.name(), da.amount()));
+    }
+
+    private void printMenuCount(String menu, int count) {
         System.out.printf("%s %d개\n", menu, count);
     }
 }
