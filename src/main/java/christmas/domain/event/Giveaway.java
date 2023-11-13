@@ -1,8 +1,11 @@
 package christmas.domain.event;
 
+import christmas.controller.MenuCount;
 import christmas.domain.Date;
 import christmas.domain.Order;
 import christmas.domain.menu.Menu;
+import java.util.Optional;
+
 
 public class Giveaway implements EventPolicy {
     private static final int MIN_TOTAL_PRICE = 12_000; //shadowing
@@ -20,5 +23,12 @@ public class Giveaway implements EventPolicy {
             return -1 * numGiveaway * giveaway.price();
         }
         return 0;
+    }
+
+    public Optional<MenuCount> receiveGiveaway(Date date, Order order) {
+        if (canBeApplied(date, order)) {
+            return Optional.of(new MenuCount(giveaway.description(), numGiveaway));
+        }
+        return Optional.empty();
     }
 }

@@ -8,6 +8,7 @@ import christmas.domain.menu.Menu;
 import java.util.EnumMap;
 import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -34,5 +35,25 @@ class GiveawayTest {
 
         assertThat(giveaway.amount(new Date(1), new Order(menus)))
                 .isEqualTo(expectedAmount);
+    }
+
+    @DisplayName("증정품 정보 - 주문 금액이 12000원 이상인 경우에만 증정품을 받을 수 있다.")
+    @Test
+    void receiveGiveaway() {
+        Map<Menu, Integer> menus = new EnumMap<Menu, Integer>(Menu.class);
+        menus.put(Menu.fromDescription("바비큐립"), 2);
+
+        assertThat(giveaway.receiveGiveaway(new Date(1), new Order(menus)))
+                .isPresent();
+    }
+
+    @DisplayName("증정품 정보 - 주문 금액이 12000원 미만이면 빈 객체를 반환한다.")
+    @Test
+    void receiveNoGiveaway() {
+        Map<Menu, Integer> menus = new EnumMap<Menu, Integer>(Menu.class);
+        menus.put(Menu.fromDescription("타파스"), 2);
+
+        assertThat(giveaway.receiveGiveaway(new Date(1), new Order(menus)))
+                .isEmpty();
     }
 }
