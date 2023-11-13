@@ -81,6 +81,10 @@ public class PromotionController {
     }
 
     private void showBenefitDetails(Date date, Order order) {
+        outputView.printBenefitDetails(calculateDiscountAmount(date, order));
+    }
+
+    private List<DiscountAmount> calculateDiscountAmount(Date date, Order order) {
         Map<String, EventPolicy> policies = new LinkedHashMap<>();
         policies.put(D_DAY_DISCOUNT_NAME, new DDayDiscount());
         policies.put(WEEKDAY_DISCOUNT_NAME, new WeekdayDiscount());
@@ -88,13 +92,12 @@ public class PromotionController {
         policies.put(SPECIAL_DISCOUNT_NAME, new SpecialDiscount());
         policies.put(GIVEAWAY_EVENT_NAME, new Giveaway());
 
-        List<DiscountAmount> discountAmounts = policies.entrySet().stream()
+        return policies.entrySet().stream()
                 .map(entry -> new DiscountAmount(entry.getKey(), entry.getValue().amount(date, order)))
                 .filter(dto -> dto.amount() < 0)
                 .toList();
-        outputView.printBenefitDetails(discountAmounts);
     }
-
+    
     private List<MenuCount> toMenuCount(Order order) {
         return order.getOrderMenu().entrySet()
                 .stream()
