@@ -43,7 +43,7 @@ class GiveawayTest {
         Map<Menu, Integer> menus = new EnumMap<Menu, Integer>(Menu.class);
         menus.put(Menu.fromDescription("바비큐립"), 2);
 
-        assertThat(giveaway.receiveGiveaway(new Date(1), new Order(menus)))
+        assertThat(giveaway.giveGiveaway(new Date(1), new Order(menus)))
                 .isPresent();
     }
 
@@ -53,7 +53,7 @@ class GiveawayTest {
         Map<Menu, Integer> menus = new EnumMap<Menu, Integer>(Menu.class);
         menus.put(Menu.fromDescription("타파스"), 2);
 
-        assertThat(giveaway.receiveGiveaway(new Date(1), new Order(menus)))
+        assertThat(giveaway.giveGiveaway(new Date(1), new Order(menus)))
                 .isEmpty();
     }
 }

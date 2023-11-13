@@ -25,7 +25,7 @@ public class Giveaway implements EventPolicy {
         return 0;
     }
 
-    public Optional<MenuCount> receiveGiveaway(Date date, Order order) {
+    public Optional<MenuCount> giveGiveaway(Date date, Order order) {
         if (canBeApplied(date, order)) {
             return Optional.of(new MenuCount(giveaway.description(), numGiveaway));
         }
