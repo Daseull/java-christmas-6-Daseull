@@ -13,4 +13,9 @@ public class OutputView {
         System.out.println("\n<주문 메뉴>");
         order.forEach(o -> System.out.printf("%s %d개\n", o.menu(), o.count()));
     }
+
+    public void printAmount(int amount) {
+        System.out.println("\n<할인 전 총주문 금액>");
+        System.out.printf("%,d원\n", amount);
+    }
 }

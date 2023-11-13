@@ -51,6 +51,7 @@ public class PromotionController {
     private void showPlan(Date date, Order order) {
         outputView.printPlanHeader();
         outputView.printOrder(toMenuCount(order));
+        outputView.printAmount(order.totalPrice());
     }
 
     private List<MenuCount> toMenuCount(Order order) {
