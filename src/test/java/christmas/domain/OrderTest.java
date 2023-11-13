@@ -28,18 +28,18 @@ class OrderTest {
         assertDoesNotThrow(() -> new Order(menus));
     }
 
-    @DisplayName("디저트만 주문 시 예외 발생")
+    @DisplayName("음료만 주문 시 예외 발생")
     @Test
     void onlyDessert() {
-        menus.put(Menu.fromDescription("아이스크림"), 3);
-        menus.put(Menu.fromDescription("초코케이크"), 7);
+        menus.put(Menu.fromDescription("샴페인"), 3);
+        menus.put(Menu.fromDescription("레드와인"), 7);
 
         assertThatThrownBy(() -> new Order(menus))
                 .isInstanceOf(PlannerException.class)
                 .hasMessage(ErrorMessage.INVALID_ORDER_MESSAGE.message());
     }
 
-    @DisplayName("디저트만 주문 시 예외 발생")
+    @DisplayName("20개 초과 주문시 예외 발생")
     @Test
     void overCount() {
         menus.put(Menu.fromDescription("타파스"), 10);

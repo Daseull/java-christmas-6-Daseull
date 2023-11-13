@@ -25,7 +25,7 @@ public class Order {
         boolean onlyDessert = orderMenu.keySet()
                 .stream()
                 .map(Menu::category)
-                .allMatch(Category::isDessert);
+                .allMatch(Category::isBeverage);
         if (onlyDessert) {
             throw new PlannerException(ErrorMessage.INVALID_ORDER_MESSAGE);
         }
