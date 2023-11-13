@@ -13,7 +13,7 @@ public class OutputView {
 
     public void printOrder(List<MenuCount> order) {
         System.out.println("\n<주문 메뉴>");
-        order.forEach(o -> printMenuCount(o.menu(), o.count()));
+        order.forEach(this::printMenuCount);
     }
 
     public void printTotalAmount(int amount) {
@@ -24,17 +24,16 @@ public class OutputView {
     public void printGiveaway(Optional<MenuCount> giveaway) {
         System.out.println("\n<증정 메뉴>");
         if (giveaway.isPresent()) {
-            MenuCount menuCount = giveaway.get();
-            printMenuCount(menuCount.menu(), menuCount.count());
+            printMenuCount(giveaway.get());
             return;
         }
-        System.out.println("없음");
+        printNone();
     }
 
     public void printBenefitDetails(List<DiscountAmount> discountAmounts) {
         System.out.println("\n<혜택 내역>");
         if (discountAmounts.isEmpty()) {
-            System.out.println("없음");
+            printNone();
             return;
         }
         discountAmounts.forEach(da -> System.out.printf("%s: %,d원\n", da.name(), da.amount()));
@@ -42,10 +41,23 @@ public class OutputView {
 
     public void printTotalBenefit(int totalBenefit) {
         System.out.println("\n<총혜택 금액>");
-        System.out.printf("%,d원\n", totalBenefit);
+        printAmount(totalBenefit);
     }
 
-    private void printMenuCount(String menu, int count) {
-        System.out.printf("%s %d개\n", menu, count);
+    public void printFinalAmount(int finalAMount) {
+        System.out.println("\n<할인 후 예상 결제 금액>");
+        printAmount(finalAMount);
+    }
+
+    private void printNone() {
+        System.out.println("없음");
+    }
+
+    private void printMenuCount(MenuCount menuCount) {
+        System.out.printf("%s %d개\n", menuCount.menu(), menuCount.count());
+    }
+
+    private void printAmount(int amount) {
+        System.out.printf("%,d원\n", amount);
     }
 }
