@@ -3,6 +3,7 @@ package christmas.controller;
 import christmas.domain.Date;
 import christmas.domain.Order;
 import christmas.domain.OrderMenu;
+import christmas.domain.event.Giveaway;
 import christmas.exception.PlannerException;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -50,8 +51,19 @@ public class PromotionController {
     //TODO
     private void showPlan(Date date, Order order) {
         outputView.printPlanHeader();
-        outputView.printOrder(toMenuCount(order));
-        outputView.printAmount(order.totalPrice());
+        showOrder(order);
+        outputView.printTotalAmount(order.totalPrice());
+        showGiveaway(date, order);
+    }
+
+    private void showOrder(Order order) {
+        List<MenuCount> menuCounts = toMenuCount(order);
+        outputView.printOrder(menuCounts);
+    }
+
+    private void showGiveaway(Date date, Order order) {
+        Giveaway giveaway = new Giveaway();
+        outputView.printGiveaway(giveaway.receiveGiveaway(date, order));
     }
 
     private List<MenuCount> toMenuCount(Order order) {
@@ -60,4 +72,6 @@ public class PromotionController {
                 .map(entry -> new MenuCount(entry.getKey().description(), entry.getValue()))
                 .toList();
     }
+
+
 }
