@@ -16,6 +16,11 @@ public class Order {
         this.orderMenu = orderMenu;
     }
 
+    // view 를 위한 getter
+    public Map<Menu, Integer> getOrderMenu() {
+        return orderMenu;
+    }
+
     private void validate(Map<Menu, Integer> orderMenu) {
         validateCategory(orderMenu);
         validateTotalCount(orderMenu);

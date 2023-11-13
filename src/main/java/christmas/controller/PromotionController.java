@@ -5,16 +5,18 @@ import christmas.domain.Order;
 import christmas.domain.OrderMenu;
 import christmas.exception.PlannerException;
 import christmas.view.InputView;
+import christmas.view.OutputView;
 import christmas.view.Parser;
 import java.util.List;
 
 public class PromotionController {
     private final InputView inputView = new InputView();
+    private final OutputView outputView = new OutputView();
 
     public void run() {
         Date date = askVisitDate();
         Order order = askMenus();
-        showPlan();
+        showPlan(date, order);
     }
 
     private Date askVisitDate() {
@@ -46,7 +48,15 @@ public class PromotionController {
     }
 
     //TODO
-    private void showPlan() {
+    private void showPlan(Date date, Order order) {
+        outputView.printPlanHeader();
+        outputView.printOrder(toMenuCount(order));
+    }
 
+    private List<MenuCount> toMenuCount(Order order) {
+        return order.getOrderMenu().entrySet()
+                .stream()
+                .map(entry -> new MenuCount(entry.getKey().description(), entry.getValue()))
+                .toList();
     }
 }

@@ -30,7 +30,7 @@ class GiveawayTest {
     @Test
     void amount() {
         Map<Menu, Integer> menus = new EnumMap<Menu, Integer>(Menu.class);
-        menus.put(Menu.fromDescription("샴페인"), 2);
+        menus.put(Menu.fromDescription("양송이수프"), 2);
 
         assertThat(giveaway.amount(new Date(1), new Order(menus)))
                 .isEqualTo(-25000);
