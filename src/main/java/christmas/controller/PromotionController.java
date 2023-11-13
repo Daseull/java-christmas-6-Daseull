@@ -30,6 +30,7 @@ public class PromotionController {
     public void run() {
         Date date = askVisitDate();
         Order order = askMenus();
+
         showPlan(date, order);
     }
 
@@ -68,6 +69,7 @@ public class PromotionController {
         outputView.printTotalAmount(order.totalPrice());
         showGiveaway(date, order);
         showBenefitDetails(date, order);
+        showTotalBenefit(date, order);
     }
 
     private void showOrder(Order order) {
@@ -84,6 +86,13 @@ public class PromotionController {
         outputView.printBenefitDetails(calculateDiscountAmount(date, order));
     }
 
+    private void showTotalBenefit(Date date, Order order) {
+        int totalBenefit = calculateDiscountAmount(date, order).stream()
+                .mapToInt(DiscountAmount::amount)
+                .sum();
+        outputView.printTotalBenefit(totalBenefit);
+    }
+
     private List<DiscountAmount> calculateDiscountAmount(Date date, Order order) {
         Map<String, EventPolicy> policies = new LinkedHashMap<>();
         policies.put(D_DAY_DISCOUNT_NAME, new DDayDiscount());
@@ -97,7 +106,7 @@ public class PromotionController {
                 .filter(dto -> dto.amount() < 0)
                 .toList();
     }
-    
+
     private List<MenuCount> toMenuCount(Order order) {
         return order.getOrderMenu().entrySet()
                 .stream()

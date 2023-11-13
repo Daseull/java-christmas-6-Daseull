@@ -40,6 +40,11 @@ public class OutputView {
         discountAmounts.forEach(da -> System.out.printf("%s: %,d원\n", da.name(), da.amount()));
     }
 
+    public void printTotalBenefit(int totalBenefit) {
+        System.out.println("\n<총혜택 금액>");
+        System.out.printf("%,d원\n", totalBenefit);
+    }
+
     private void printMenuCount(String menu, int count) {
         System.out.printf("%s %d개\n", menu, count);
     }
