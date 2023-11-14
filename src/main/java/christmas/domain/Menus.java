@@ -28,6 +28,12 @@ public class Menus {
         validateTotalCount(count);
     }
 
+    public boolean isAllInCategory(Category category) {
+        return menus.keySet().stream()
+                .map(Menu::category)
+                .allMatch(c -> c.equals(category));
+    }
+
     public int countByCategory(Category category) {
         return (int) menus.keySet().stream()
                 .filter(key -> category.equals(key.category()))

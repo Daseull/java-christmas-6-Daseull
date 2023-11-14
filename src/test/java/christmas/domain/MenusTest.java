@@ -20,12 +20,11 @@ class MenusTest {
     @DisplayName("메뉴 추가 테스트")
     @Test
     void add() {
-        List<String> menus = List.of("양송이수프", "초코케이크", "레드와인");
+        List<String> menuNames = List.of("양송이수프", "초코케이크", "레드와인");
         List<Integer> counts = List.of(1, 2, 2);
 
-        IntStream.range(0, menus.size())
-                .forEach(i -> assertDoesNotThrow(() -> this.menus.add(menus.get(i), counts.get(i))));
-
+        IntStream.range(0, menuNames.size())
+                .forEach(i -> assertDoesNotThrow(() -> menus.add(menuNames.get(i), counts.get(i))));
     }
 
     @DisplayName("메뉴 추가 - 중복, 없는메뉴, 개수가 1개이상이 아닌 경우 _ 예외 발생")
@@ -75,5 +74,16 @@ class MenusTest {
 
         assertThat(menus.countByCategory(Category.valueOf(categoryName)))
                 .isEqualTo(expectedCount);
+    }
+
+    @DisplayName("모두 한 카테고리의 메뉴들인지 반환")
+    @ParameterizedTest
+    @CsvSource(value = {"샴페인,레드와인,BEVERAGE,true", "바비큐립,크리스마스파스타,MAIN,true", "해산물파스타,레드와인,MAIN,false"})
+    void isAllInCategory(String menu1, String menu2, String categoryName, boolean expected) {
+        menus.add(menu1, 3);
+        menus.add(menu2, 7);
+
+        assertThat(menus.isAllInCategory(Category.valueOf(categoryName)))
+                .isEqualTo(expected);
     }
 }

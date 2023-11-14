@@ -25,16 +25,12 @@ public class Order {
         this.menus = menus;
     }
 
-    // view 를 위한 getter
     public Map<Menu, Integer> getOrderMenu() {
         return menus.getMenus();
     }
 
     private void validateCategory(Menus menus) {
-        int numBeverage = menus.countByCategory(Category.BEVERAGE);
-        int totalCount = menus.totalCount();
-
-        if (numBeverage == totalCount) {
+        if(menus.isAllInCategory(Category.BEVERAGE)){
             throw new PromotionException(ErrorMessage.INVALID_ORDER_MESSAGE);
         }
     }

@@ -1,14 +1,11 @@
 package christmas.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import christmas.domain.event.Event;
 import christmas.domain.menu.Menu;
 import christmas.dto.MenuCount;
-import christmas.exception.ErrorMessage;
-import christmas.exception.PromotionException;
 import java.util.Map;
 import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
@@ -27,17 +24,6 @@ class OrderTest {
         menus.add("레드와인", 1);
 
         assertDoesNotThrow(() -> new Order(new Date(1), menus));
-    }
-
-    @DisplayName("음료만 주문 시 예외 발생")
-    @Test
-    void onlyDessert() {
-        menus.add(("샴페인"), 3);
-        menus.add(("레드와인"), 7);
-
-        assertThatThrownBy(() -> new Order(new Date(1), menus))
-                .isInstanceOf(PromotionException.class)
-                .hasMessage(ErrorMessage.INVALID_ORDER_MESSAGE.message());
     }
 
     @DisplayName("할인이 적용되는 항목들만 반환한다.")
