@@ -52,13 +52,13 @@ class MenusTest {
 
     @DisplayName("총 주문 금액 테스트")
     @Test
-    void totalPrice() {
+    void totalAmount() {
         menus.add(("티본스테이크"), 1);
         menus.add(("바비큐립"), 1);
         menus.add(("초코케이크"), 2);
         menus.add(("제로콜라"), 1);
 
-        assertThat(menus.totalPrice())
+        assertThat(menus.totalAmount())
                 .isEqualTo(142000);
     }
 

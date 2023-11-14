@@ -4,10 +4,10 @@ import christmas.domain.Date;
 import christmas.domain.Menus;
 
 public interface EventPolicy {
-    int MIN_TOTAL_PRICE = 10_000;
+    int MIN_TOTAL_AMOUNT = 10_000;
 
     default boolean isApplicableMenus(Menus menus) {
-        return menus.totalPrice() >= MIN_TOTAL_PRICE;
+        return menus.totalAmount() >= MIN_TOTAL_AMOUNT;
     }
 
     boolean canBeApplied(Date date, Menus menus);

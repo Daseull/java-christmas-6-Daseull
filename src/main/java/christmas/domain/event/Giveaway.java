@@ -1,20 +1,20 @@
 package christmas.domain.event;
 
-import christmas.dto.MenuCount;
 import christmas.domain.Date;
 import christmas.domain.Menus;
 import christmas.domain.menu.Menu;
+import christmas.dto.MenuCount;
 import java.util.Optional;
 
 
 public class Giveaway implements EventPolicy {
-    private static final int MIN_TOTAL_PRICE = 12_000; //shadowing
+    private static final int MIN_TOTAL_AMOUNT = 12_000; //shadowing
     private static final Menu giveaway = Menu.CHAMPAGNE;
     private static final int numGiveaway = 1;
 
     @Override
     public boolean canBeApplied(Date date, Menus menus) {
-        return menus.totalPrice() >= MIN_TOTAL_PRICE;
+        return menus.totalAmount() >= MIN_TOTAL_AMOUNT;
     }
 
     @Override

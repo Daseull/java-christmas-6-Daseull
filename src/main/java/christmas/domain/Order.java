@@ -1,10 +1,10 @@
 package christmas.domain;
 
-import christmas.dto.MenuCount;
 import christmas.domain.event.Event;
 import christmas.domain.event.Giveaway;
 import christmas.domain.menu.Category;
 import christmas.domain.menu.Menu;
+import christmas.dto.MenuCount;
 import christmas.exception.ErrorMessage;
 import christmas.exception.PlannerException;
 import java.util.AbstractMap.SimpleEntry;
@@ -39,8 +39,8 @@ public class Order {
         }
     }
 
-    public int totalPrice() {
-        return menus.totalPrice();
+    public int totalAmount() {
+        return menus.totalAmount();
     }
 
     public Optional<MenuCount> giveGiveaway() {
@@ -68,7 +68,7 @@ public class Order {
                 .sum();
     }
 
-    public int finalAmount(){
-        return totalPrice() - totalDiscount();
+    public int finalAmount() {
+        return totalAmount() - totalDiscount();
     }
 }

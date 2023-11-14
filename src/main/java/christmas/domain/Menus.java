@@ -41,7 +41,7 @@ public class Menus {
                 .sum();
     }
 
-    public int totalPrice() {
+    public int totalAmount() {
         return menus.entrySet().stream()
                 .mapToInt(this::itemPrice)
                 .sum();

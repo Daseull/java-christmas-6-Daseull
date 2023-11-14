@@ -73,7 +73,7 @@ public class PromotionController {
     }
 
     private void showTotalAmount() {
-        outputView.printTotalAmount(order.totalPrice());
+        outputView.printTotalAmount(order.totalAmount());
     }
 
     private void showOrder() {
