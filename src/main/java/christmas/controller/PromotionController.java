@@ -68,7 +68,10 @@ public class PromotionController {
     }
 
     private void showOrder() {
-        List<MenuCount> menuCounts = toMenuCount();
+        List<MenuCount> menuCounts = order.getOrderMenu().entrySet()
+                .stream()
+                .map(MenuCount::apply)
+                .toList();
         outputView.printOrder(menuCounts);
     }
 
@@ -93,13 +96,6 @@ public class PromotionController {
     private void showFinalAmount() {
         int discountAmount = Event.totalDiscount(date, order);
         outputView.printFinalAmount(order.totalPrice() + discountAmount);
-    }
-
-    private List<MenuCount> toMenuCount() {
-        return order.getOrderMenu().entrySet()
-                .stream()
-                .map(entry -> new MenuCount(entry.getKey().description(), entry.getValue()))
-                .toList();
     }
 
     private void showBadge() {
