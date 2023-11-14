@@ -3,9 +3,9 @@ package christmas.domain;
 import java.util.Arrays;
 
 public enum Badge {
-    SANTA(20_000, "산타"),
-    TREE(10_000, "트리"),
-    STAR(5_000, "별"),
+    SANTA(-20_000, "산타"),
+    TREE(-10_000, "트리"),
+    STAR(-5_000, "별"),
     NONE(0, "없음");
 
     private final int benefit;
@@ -18,7 +18,7 @@ public enum Badge {
 
     public static Badge fromBenefit(int benefit) {
         return Arrays.stream(Badge.values())
-                .filter(b -> b.benefit <= benefit)
+                .filter(b -> benefit <= b.benefit)
                 .findFirst()
                 .orElse(NONE);
     }
