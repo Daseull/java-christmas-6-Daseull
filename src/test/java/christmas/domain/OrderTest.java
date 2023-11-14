@@ -4,9 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-import christmas.dto.MenuCount;
 import christmas.domain.event.Event;
 import christmas.domain.menu.Menu;
+import christmas.dto.MenuCount;
 import christmas.exception.ErrorMessage;
 import christmas.exception.PromotionException;
 import java.util.Map;
@@ -59,7 +59,7 @@ class OrderTest {
     void giveGiveaway() {
         Date date = new Date(1);
         Menus menus = new Menus();
-        menus.add(("양송이수프"), 2);
+        menus.add(("양송이수프"), 20);
         Order order = new Order(date, menus);
 
         Optional<MenuCount> menuCount = order.giveGiveaway();
