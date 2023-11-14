@@ -3,12 +3,8 @@ package christmas.domain.event;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.domain.Date;
+import christmas.domain.Menus;
 import christmas.domain.Order;
-import christmas.domain.event.DDayDiscount;
-import christmas.domain.event.EventPolicy;
-import christmas.domain.menu.Menu;
-import java.util.EnumMap;
-import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,12 +12,12 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class DDayDiscountTest {
     EventPolicy dDayDiscount = new DDayDiscount();
+    Menus menus = new Menus();
 
     @DisplayName("10000원 미만인 경우 할인 적용되지 않는다.")
     @Test
     void notApplicableOrder() {
-        Map<Menu, Integer> menus = new EnumMap<Menu, Integer>(Menu.class);
-        menus.put(Menu.fromDescription("타파스"), 1);
+        menus.add(("타파스"), 1);
 
         assertThat(dDayDiscount.canBeApplied(new Date(25), new Order(menus)))
                 .isEqualTo(false);
@@ -46,13 +42,12 @@ class DDayDiscountTest {
     }
 
     Order createOrder() {
-        Map<Menu, Integer> menus = new EnumMap<Menu, Integer>(Menu.class);
-        menus.put(Menu.fromDescription("타파스"), 2);
-        menus.put(Menu.fromDescription("시저샐러드"), 1);
-        menus.put(Menu.fromDescription("해산물파스타"), 2);
-        menus.put(Menu.fromDescription("초코케이크"), 1);
-        menus.put(Menu.fromDescription("제로콜라"), 1);
-        menus.put(Menu.fromDescription("샴페인"), 1);
+        menus.add(("타파스"), 2);
+        menus.add(("시저샐러드"), 1);
+        menus.add(("해산물파스타"), 2);
+        menus.add(("초코케이크"), 1);
+        menus.add(("제로콜라"), 1);
+        menus.add(("샴페인"), 1);
         return new Order(menus);
     }
 }

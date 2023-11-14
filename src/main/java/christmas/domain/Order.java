@@ -9,54 +9,36 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class Order {
-    private final Map<Menu, Integer> orderMenu;
+    private final Menus menus;
 
-    public Order(Map<Menu, Integer> orderMenu) {
-        validate(orderMenu);
-        this.orderMenu = orderMenu;
+    public Order(Menus menus) {
+        validateCategory(menus);
+        this.menus = menus;
     }
 
     // view 를 위한 getter
     public Map<Menu, Integer> getOrderMenu() {
-        return orderMenu;
+        return menus.getMenus();
     }
 
-    private void validate(Map<Menu, Integer> orderMenu) {
-        validateCategory(orderMenu);
-        validateTotalCount(orderMenu);
-    }
+    private void validateCategory(Menus menus) {
+        int numBeverage = menus.countByCategory(Category.BEVERAGE);
+        int totalCount = menus.totalCount();
 
-    private void validateCategory(Map<Menu, Integer> orderMenu) {
-        boolean onlyDessert = orderMenu.keySet()
-                .stream()
-                .map(Menu::category)
-                .allMatch(Category::isBeverage);
-        if (onlyDessert) {
+        if(numBeverage == totalCount){
             throw new PlannerException(ErrorMessage.INVALID_ORDER_MESSAGE);
         }
     }
 
-    private void validateTotalCount(Map<Menu, Integer> orderMenu) {
-        int sum = orderMenu.values().stream().mapToInt(Integer::intValue).sum();
-        if (sum > Constant.MAX_ORDER_COUNT) {
-            throw new PlannerException(ErrorMessage.INVALID_ORDER_MESSAGE);
-        }
+    public int totalPrice(){
+        return menus.totalPrice();
     }
 
-    public int totalPrice() {
-        return orderMenu.entrySet().stream()
-                .mapToInt(this::itemPrice)
-                .sum();
+    public int countByCategory(Category category){
+        return menus.countByCategory(category);
     }
 
-    private int itemPrice(Entry<Menu, Integer> item) {
-        return item.getKey().price() * item.getValue();
-    }
 
-    public int countByCategory(Category category) {
-        return (int) orderMenu.keySet().stream()
-                .filter(key -> category.equals(key.category()))
-                .mapToInt(orderMenu::get)
-                .sum();
-    }
+
+
 }

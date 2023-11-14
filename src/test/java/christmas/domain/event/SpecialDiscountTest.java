@@ -3,12 +3,9 @@ package christmas.domain.event;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.domain.Date;
+import christmas.domain.Menus;
 import christmas.domain.Order;
-import christmas.domain.event.SpecialDiscount;
-import christmas.domain.menu.Menu;
-import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,8 +17,8 @@ class SpecialDiscountTest {
     @Test
     void notApplicableOrder() {
 
-        Map<Menu, Integer> menus = new EnumMap<Menu, Integer>(Menu.class);
-        menus.put(Menu.fromDescription("타파스"), 1);
+        Menus menus = new Menus();
+        menus.add(("타파스"), 1);
 
         assertThat(specialDiscount.canBeApplied(new Date(starredDates.stream().findAny().get()), new Order(menus)))
                 .isEqualTo(false);
@@ -42,14 +39,13 @@ class SpecialDiscountTest {
     }
 
     Order createOrder() {
-        Map<Menu, Integer> menus = new EnumMap<Menu, Integer>(Menu.class);
-        menus.put(Menu.fromDescription("타파스"), 2);
-        menus.put(Menu.fromDescription("시저샐러드"), 1);
-        menus.put(Menu.fromDescription("해산물파스타"), 2);
-        menus.put(Menu.fromDescription("초코케이크"), 2);
-        menus.put(Menu.fromDescription("제로콜라"), 1);
-        menus.put(Menu.fromDescription("샴페인"), 1);
+        Menus menus = new Menus();
+        menus.add(("타파스"), 2);
+        menus.add(("시저샐러드"), 1);
+        menus.add(("해산물파스타"), 2);
+        menus.add(("초코케이크"), 2);
+        menus.add(("제로콜라"), 1);
+        menus.add(("샴페인"), 1);
         return new Order(menus);
     }
-
 }

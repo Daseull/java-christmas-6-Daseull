@@ -4,9 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.controller.MenuCount;
 import christmas.domain.Date;
+import christmas.domain.Menus;
 import christmas.domain.Order;
 import christmas.domain.menu.Menu;
-import java.util.EnumMap;
 import java.util.Map;
 import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
@@ -15,14 +15,14 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class EventTest {
+    Menus menus = new Menus();
 
     @DisplayName("할인이 적용되는 항목들만 반환한다.")
     @Test
     void benefitDetails() {
         Date specialWeekday = new Date(31);
-        Map<Menu, Integer> menus = new EnumMap<Menu, Integer>(Menu.class);
-        menus.put(Menu.fromDescription("양송이수프"), 1);
-        menus.put(Menu.fromDescription("아이스크림"), 1);
+        menus.add(("양송이수프"), 1);
+        menus.add(("아이스크림"), 1);
 
         Map<Event, Integer> result = Event.benefitDetails(specialWeekday, new Order(menus));
 
@@ -33,8 +33,7 @@ class EventTest {
     @Test
     void giveGiveaway() {
         Date date = new Date(1);
-        Map<Menu, Integer> menus = new EnumMap<Menu, Integer>(Menu.class);
-        menus.put(Menu.fromDescription("양송이수프"), 2);
+        menus.add(("양송이수프"), 2);
 
         Optional<MenuCount> menuCount = Event.giveGiveaway(date, new Order(menus));
 
@@ -47,8 +46,7 @@ class EventTest {
     @Test
     void giveNoGiveaway() {
         Date date = new Date(1);
-        Map<Menu, Integer> menus = new EnumMap<Menu, Integer>(Menu.class);
-        menus.put(Menu.fromDescription("타파스"), 2);
+        menus.add(("타파스"), 2);
 
         Optional<MenuCount> menuCount = Event.giveGiveaway(date, new Order(menus));
 
@@ -60,9 +58,8 @@ class EventTest {
     @CsvSource(value = {"25,2,3,-10469", "1,4,1,-9092"})
     void totalDiscount(int dateSource, int numMain, int numDessert, int expectedAmount) {
         Date date = new Date(dateSource);
-        Map<Menu, Integer> menus = new EnumMap<Menu, Integer>(Menu.class);
-        menus.put(Menu.fromDescription("티본스테이크"), numMain);
-        menus.put(Menu.fromDescription("아이스크림"), numDessert);
+        menus.add(("티본스테이크"), numMain);
+        menus.add(("아이스크림"), numDessert);
 
         assertThat(Event.totalDiscount(date, new Order(menus))).isEqualTo(expectedAmount);
     }
@@ -72,9 +69,8 @@ class EventTest {
     @CsvSource(value = {"25,2,3,-35469", "1,4,1,-34092"})
     void totalBenefit(int dateSource, int numMain, int numDessert, int expectedAmount) {
         Date date = new Date(dateSource);
-        Map<Menu, Integer> menus = new EnumMap<Menu, Integer>(Menu.class);
-        menus.put(Menu.fromDescription("티본스테이크"), numMain);
-        menus.put(Menu.fromDescription("아이스크림"), numDessert);
+        menus.add(("티본스테이크"), numMain);
+        menus.add(("아이스크림"), numDessert);
 
         assertThat(Event.totalBenefit(date, new Order(menus))).isEqualTo(expectedAmount);
     }

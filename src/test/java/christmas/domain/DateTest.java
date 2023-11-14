@@ -46,7 +46,7 @@ class DateTest {
     @DisplayName("특정날들에 해당 날짜가 포함되는지 테스트")
     @ParameterizedTest
     @CsvSource({"1,true", "25,false"})
-    void isIncluded(int dateSource, boolean expected){
+    void isIncluded(int dateSource, boolean expected) {
         Date date = new Date(dateSource);
         List<Integer> dates = List.of(1, 2);
 
@@ -56,21 +56,20 @@ class DateTest {
     @DisplayName("특정 기간에 해당날짜가 포함되는지 테스트")
     @ParameterizedTest
     @CsvSource({"1,true", "26,false"})
-    void isInRange(int dateSource, boolean expected){
+    void isInRange(int dateSource, boolean expected) {
         Date date = new Date(dateSource);
 
-        assertThat(date.isInRange(1,25))
+        assertThat(date.isInRange(1, 25))
                 .isEqualTo(expected);
     }
 
     @DisplayName("해당 날짜가 특정날로부터 몇번째 날인지 구하는 기능 테스트")
     @ParameterizedTest
     @CsvSource({"1,1,0", "31,25,6"})
-    void isInRange(int dateSource, int from, int expectedDay){
+    void isInRange(int dateSource, int from, int expectedDay) {
         Date date = new Date(dateSource);
 
         assertThat(date.dayFromDate(from))
                 .isEqualTo(expectedDay);
     }
-
 }

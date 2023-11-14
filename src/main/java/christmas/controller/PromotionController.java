@@ -3,7 +3,7 @@ package christmas.controller;
 import christmas.domain.Badge;
 import christmas.domain.Date;
 import christmas.domain.Order;
-import christmas.domain.OrderMenu;
+import christmas.domain.Menus;
 import christmas.domain.event.Event;
 import christmas.exception.PlannerException;
 import christmas.view.InputView;
@@ -46,11 +46,11 @@ public class PromotionController {
     }
 
     private Order createOrder(List<String> menus) {
-        OrderMenu orderMenu = new OrderMenu();
-        menus.stream()
-                .map(menu -> Parser.parseMenu(menu, "-"))
-                .forEach(menuCount -> orderMenu.add(menuCount.menu(), menuCount.count()));
-        return new Order(orderMenu.getOrderMenu());
+//        Menus orderMenu = new Menus();
+//        menus.stream()
+//                .map(menu -> Parser.parseMenu(menu, "-"))
+//                .forEach(menuCount -> orderMenu.add(menuCount.menu(), menuCount.count()));
+        return new Order(new Menus());
     }
 
     private void showPlan() {
