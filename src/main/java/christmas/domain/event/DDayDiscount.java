@@ -1,7 +1,7 @@
 package christmas.domain.event;
 
 import christmas.domain.Date;
-import christmas.domain.Order;
+import christmas.domain.Menus;
 
 public class DDayDiscount implements EventPolicy {
     private static final int FIRST_DATE = 1;
@@ -10,13 +10,13 @@ public class DDayDiscount implements EventPolicy {
     private static final int BOTTOM_DISCOUNT_AMOUNT = -1_000;
 
     @Override
-    public boolean canBeApplied(Date date, Order order) {
-        return isApplicableOrder(order) && date.isInRange(FIRST_DATE, LAST_DATE);
+    public boolean canBeApplied(Date date, Menus menus) {
+        return isApplicableMenus(menus) && date.isInRange(FIRST_DATE, LAST_DATE);
     }
 
     @Override
-    public int amount(Date date, Order order) {
-        if (canBeApplied(date, order)) {
+    public int amount(Date date, Menus menus) {
+        if (canBeApplied(date, menus)) {
             return BOTTOM_DISCOUNT_AMOUNT + date.dayFromDate(FIRST_DATE) * DISCOUNT_UNIT;
         }
         return 0;

@@ -12,16 +12,16 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class DDayDiscountTest {
     EventPolicy dDayDiscount = new DDayDiscount();
-    Menus menus = new Menus();
 
     @DisplayName("10000원 미만인 경우 할인 적용되지 않는다.")
     @Test
     void notApplicableOrder() {
+        Menus menus = new Menus();
         menus.add(("타파스"), 1);
 
-        assertThat(dDayDiscount.canBeApplied(new Date(25), new Order(menus)))
+        assertThat(dDayDiscount.canBeApplied(new Date(25), menus))
                 .isEqualTo(false);
-        assertThat(dDayDiscount.amount(new Date(25), new Order(menus)))
+        assertThat(dDayDiscount.amount(new Date(25), menus))
                 .isEqualTo(0);
     }
 
@@ -29,7 +29,7 @@ class DDayDiscountTest {
     @ParameterizedTest
     @CsvSource({"25,true", "26,false"})
     void notApplicableDate(int dateSource, boolean expected) {
-        assertThat(dDayDiscount.canBeApplied(new Date(dateSource), createOrder()))
+        assertThat(dDayDiscount.canBeApplied(new Date(dateSource), createMenus()))
                 .isEqualTo(expected);
     }
 
@@ -37,17 +37,18 @@ class DDayDiscountTest {
     @ParameterizedTest
     @CsvSource({"1,-1000", "25,-3400"})
     void amount(int dateSource, int expectedAmount) {
-        assertThat(dDayDiscount.amount(new Date(dateSource), createOrder()))
+        assertThat(dDayDiscount.amount(new Date(dateSource), createMenus()))
                 .isEqualTo(expectedAmount);
     }
 
-    Order createOrder() {
+    Menus createMenus() {
+        Menus menus = new Menus();
         menus.add(("타파스"), 2);
         menus.add(("시저샐러드"), 1);
         menus.add(("해산물파스타"), 2);
         menus.add(("초코케이크"), 1);
         menus.add(("제로콜라"), 1);
         menus.add(("샴페인"), 1);
-        return new Order(menus);
+        return menus;
     }
 }

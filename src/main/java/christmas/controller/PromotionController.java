@@ -15,14 +15,24 @@ import java.util.Map;
 public class PromotionController {
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
-    private Date date;
     private Order order;
 
     public void run() {
-        date = askVisitDate();
-        order = askMenus();
+        this.order = createOrder();
         showPlan();
         showBadge();
+    }
+
+    private Order createOrder(){
+        Date date = askVisitDate();
+        while(true){
+            try {
+                Menus menus = askMenus();
+                return new Order(date, menus);
+            }catch (PlannerException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     private Date askVisitDate() {
@@ -35,22 +45,19 @@ public class PromotionController {
         }
     }
 
-    private Order askMenus() {
+    private Menus askMenus() {
         while (true) {
             try {
-                return createOrder(inputView.readMenus());
+                List<String> input = inputView.readMenus();
+                Menus menus = new Menus();
+                input.stream()
+                        .map(menu -> Parser.parseMenu(menu, "-"))
+                        .forEach(menuCount -> menus.add(menuCount.menu(), menuCount.count()));
+                return menus;
             } catch (PlannerException e) {
                 System.out.println(e.getMessage());
             }
         }
-    }
-
-    private Order createOrder(List<String> menus) {
-//        Menus orderMenu = new Menus();
-//        menus.stream()
-//                .map(menu -> Parser.parseMenu(menu, "-"))
-//                .forEach(menuCount -> orderMenu.add(menuCount.menu(), menuCount.count()));
-        return new Order(new Menus());
     }
 
     private void showPlan() {
@@ -76,11 +83,11 @@ public class PromotionController {
     }
 
     private void showGiveaway() {
-        outputView.printGiveaway(Event.giveGiveaway(date, order));
+        outputView.printGiveaway(order.giveGiveaway());
     }
 
     private void showBenefitDetails() {
-        Map<Event, Integer> details = Event.benefitDetails(date, order);
+        Map<Event, Integer> details = order.benefitDetails();
 
         List<DiscountAmount> discountAmounts = details.entrySet().stream()
                 .map(DiscountAmount::apply)
@@ -89,17 +96,16 @@ public class PromotionController {
     }
 
     private void showTotalBenefit() {
-        int totalBenefit = Event.totalBenefit(date, order);
+        int totalBenefit = order.totalBenefit();
         outputView.printTotalBenefit(totalBenefit);
     }
 
     private void showFinalAmount() {
-        int discountAmount = Event.totalDiscount(date, order);
-        outputView.printFinalAmount(order.totalPrice() + discountAmount);
+        outputView.printFinalAmount(order.finalAmount());
     }
 
     private void showBadge() {
-        Badge badge = Badge.fromBenefit(Event.totalBenefit(date, order));
+        Badge badge = Badge.fromBenefit(order.totalBenefit());
         outputView.printBadge(badge.displayName());
     }
 }

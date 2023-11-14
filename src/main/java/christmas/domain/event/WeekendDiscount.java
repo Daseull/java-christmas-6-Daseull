@@ -4,7 +4,7 @@ import static java.time.DayOfWeek.FRIDAY;
 import static java.time.DayOfWeek.SATURDAY;
 
 import christmas.domain.Date;
-import christmas.domain.Order;
+import christmas.domain.Menus;
 import christmas.domain.menu.Category;
 import java.time.DayOfWeek;
 import java.util.List;
@@ -13,14 +13,14 @@ public class WeekendDiscount implements EventPolicy {
     private static final int DISCOUNT_UNIT = -2_023;
 
     @Override
-    public boolean canBeApplied(Date date, Order order) {
-        return isApplicableOrder(order) && isWeekend(date.dayOfWeek());
+    public boolean canBeApplied(Date date, Menus menus) {
+        return isApplicableMenus(menus) && isWeekend(date.dayOfWeek());
     }
 
     @Override
-    public int amount(Date date, Order order) {
-        if(canBeApplied(date, order)){
-            return order.countByCategory(Category.MAIN) * DISCOUNT_UNIT;
+    public int amount(Date date, Menus menus) {
+        if (canBeApplied(date, menus)) {
+            return menus.countByCategory(Category.MAIN) * DISCOUNT_UNIT;
         }
         return 0;
     }

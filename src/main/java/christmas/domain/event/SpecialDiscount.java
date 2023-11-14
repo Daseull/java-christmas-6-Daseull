@@ -1,7 +1,7 @@
 package christmas.domain.event;
 
 import christmas.domain.Date;
-import christmas.domain.Order;
+import christmas.domain.Menus;
 import java.util.List;
 
 public class SpecialDiscount implements EventPolicy {
@@ -9,13 +9,13 @@ public class SpecialDiscount implements EventPolicy {
     private static final int DISCOUNT_UNIT = -1_000;
 
     @Override
-    public boolean canBeApplied(Date date, Order order) {
-        return isApplicableOrder(order) && isStarredDate(date);
+    public boolean canBeApplied(Date date, Menus menus) {
+        return isApplicableMenus(menus) && isStarredDate(date);
     }
 
     @Override
-    public int amount(Date date, Order order) {
-        if (canBeApplied(date, order)) {
+    public int amount(Date date, Menus menus) {
+        if (canBeApplied(date, menus)) {
             return DISCOUNT_UNIT;
         }
         return 0;

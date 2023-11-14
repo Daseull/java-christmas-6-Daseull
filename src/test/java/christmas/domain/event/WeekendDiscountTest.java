@@ -19,24 +19,24 @@ class WeekendDiscountTest {
         Menus menus = new Menus();
         menus.add(("타파스"), 1);
 
-        assertThat(weekendDiscount.canBeApplied(weekdayDate, new Order(menus)))
+        assertThat(weekendDiscount.canBeApplied(weekdayDate, menus))
                 .isEqualTo(false);
     }
 
     @DisplayName("주말이 아니면 적용되지 않는다.")
     @Test
     void notApplicableDate() {
-        assertThat(weekendDiscount.canBeApplied(weekendDate, createOrder())).isEqualTo(true);
-        assertThat(weekendDiscount.canBeApplied(weekdayDate, createOrder())).isEqualTo(false);
+        assertThat(weekendDiscount.canBeApplied(weekendDate, createMenus())).isEqualTo(true);
+        assertThat(weekendDiscount.canBeApplied(weekdayDate, createMenus())).isEqualTo(false);
     }
 
     @DisplayName("할인 금액 테스트")
     @Test
     void amount() {
-        assertThat(weekendDiscount.amount(weekendDate, createOrder())).isEqualTo(-6069);
+        assertThat(weekendDiscount.amount(weekendDate, createMenus())).isEqualTo(-6069);
     }
 
-    Order createOrder() {
+    Menus createMenus() {
         Menus menus = new Menus();
         menus.add(("타파스"), 2);
         menus.add(("티본스테이크"), 1);
@@ -44,6 +44,6 @@ class WeekendDiscountTest {
         menus.add(("초코케이크"), 2);
         menus.add(("제로콜라"), 1);
         menus.add(("샴페인"), 1);
-        return new Order(menus);
+        return menus;
     }
 }

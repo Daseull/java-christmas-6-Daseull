@@ -1,16 +1,16 @@
 package christmas.domain.event;
 
 import christmas.domain.Date;
-import christmas.domain.Order;
+import christmas.domain.Menus;
 
 public interface EventPolicy {
     int MIN_TOTAL_PRICE = 10_000;
 
-    default boolean isApplicableOrder(Order order) {
-        return order.totalPrice() >= MIN_TOTAL_PRICE;
+    default boolean isApplicableMenus(Menus menus) {
+        return menus.totalPrice() >= MIN_TOTAL_PRICE;
     }
 
-    boolean canBeApplied(Date date, Order order);
+    boolean canBeApplied(Date date, Menus menus);
 
-    int amount(Date date, Order order);
+    int amount(Date date, Menus menus);
 }
