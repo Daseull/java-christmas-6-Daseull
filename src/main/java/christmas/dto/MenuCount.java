@@ -1,6 +1,5 @@
-package christmas.controller;
+package christmas.dto;
 
-import christmas.domain.event.Event;
 import christmas.domain.menu.Menu;
 import java.util.Map.Entry;
 

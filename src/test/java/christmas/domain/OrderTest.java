@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-import christmas.controller.MenuCount;
+import christmas.dto.MenuCount;
 import christmas.domain.event.Event;
 import christmas.domain.menu.Menu;
 import christmas.exception.ErrorMessage;

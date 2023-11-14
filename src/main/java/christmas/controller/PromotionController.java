@@ -2,9 +2,11 @@ package christmas.controller;
 
 import christmas.domain.Badge;
 import christmas.domain.Date;
-import christmas.domain.Order;
 import christmas.domain.Menus;
+import christmas.domain.Order;
 import christmas.domain.event.Event;
+import christmas.dto.DiscountAmount;
+import christmas.dto.MenuCount;
 import christmas.exception.PlannerException;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -23,13 +25,13 @@ public class PromotionController {
         showBadge();
     }
 
-    private Order createOrder(){
+    private Order createOrder() {
         Date date = askVisitDate();
-        while(true){
+        while (true) {
             try {
                 Menus menus = askMenus();
                 return new Order(date, menus);
-            }catch (PlannerException e) {
+            } catch (PlannerException e) {
                 System.out.println(e.getMessage());
             }
         }

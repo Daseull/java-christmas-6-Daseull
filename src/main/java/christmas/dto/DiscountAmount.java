@@ -1,4 +1,4 @@
-package christmas.controller;
+package christmas.dto;
 
 import christmas.domain.event.Event;
 import java.util.Map.Entry;

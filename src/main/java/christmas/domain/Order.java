@@ -1,6 +1,6 @@
 package christmas.domain;
 
-import christmas.controller.MenuCount;
+import christmas.dto.MenuCount;
 import christmas.domain.event.Event;
 import christmas.domain.event.Giveaway;
 import christmas.domain.menu.Category;

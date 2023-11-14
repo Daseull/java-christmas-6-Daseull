@@ -1,6 +1,6 @@
 package christmas.view;
 
-import christmas.controller.MenuCount;
+import christmas.dto.MenuCount;
 import java.util.Arrays;
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package christmas.view;
 
-import christmas.controller.DiscountAmount;
-import christmas.controller.MenuCount;
+import christmas.dto.DiscountAmount;
+import christmas.dto.MenuCount;
 import java.util.List;
 import java.util.Optional;
 
