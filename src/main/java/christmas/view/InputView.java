@@ -5,7 +5,7 @@ import static christmas.view.Parser.parseMenus;
 
 import camp.nextstep.edu.missionutils.Console;
 import christmas.exception.ErrorMessage;
-import christmas.exception.PlannerException;
+import christmas.exception.PromotionException;
 import java.util.List;
 
 public class InputView {
@@ -23,7 +23,7 @@ public class InputView {
         if (input.matches(DATE_PATTERN)) {
             return;
         }
-        throw new PlannerException(ErrorMessage.INVALID_DATE_MESSAGE);
+        throw new PromotionException(ErrorMessage.INVALID_DATE_MESSAGE);
     }
 
     public List<String> readMenus() {
@@ -37,6 +37,6 @@ public class InputView {
         if (menus.matches(MENUS_PATTERN)) {
             return;
         }
-        throw new PlannerException(ErrorMessage.INVALID_ORDER_MESSAGE);
+        throw new PromotionException(ErrorMessage.INVALID_ORDER_MESSAGE);
     }
 }

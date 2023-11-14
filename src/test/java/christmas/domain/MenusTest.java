@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import christmas.domain.menu.Category;
 import christmas.exception.ErrorMessage;
-import christmas.exception.PlannerException;
+import christmas.exception.PromotionException;
 import java.util.List;
 import java.util.stream.IntStream;
 import org.junit.jupiter.api.DisplayName;
@@ -35,7 +35,7 @@ class MenusTest {
         menus.add("양송이수프", 1);
 
         assertThatThrownBy(() -> menus.add(menu, count))
-                .isInstanceOf(PlannerException.class)
+                .isInstanceOf(PromotionException.class)
                 .hasMessage(ErrorMessage.INVALID_ORDER_MESSAGE.message());
     }
 
@@ -46,7 +46,7 @@ class MenusTest {
         menus.add("초코케이크", 9);
 
         assertThatThrownBy(() -> menus.add(("레드와인"), 8))
-                .isInstanceOf(PlannerException.class)
+                .isInstanceOf(PromotionException.class)
                 .hasMessage(ErrorMessage.INVALID_ORDER_MESSAGE.message());
     }
 

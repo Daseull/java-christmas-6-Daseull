@@ -6,7 +6,7 @@ import christmas.domain.menu.Category;
 import christmas.domain.menu.Menu;
 import christmas.dto.MenuCount;
 import christmas.exception.ErrorMessage;
-import christmas.exception.PlannerException;
+import christmas.exception.PromotionException;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -35,7 +35,7 @@ public class Order {
         int totalCount = menus.totalCount();
 
         if (numBeverage == totalCount) {
-            throw new PlannerException(ErrorMessage.INVALID_ORDER_MESSAGE);
+            throw new PromotionException(ErrorMessage.INVALID_ORDER_MESSAGE);
         }
     }
 

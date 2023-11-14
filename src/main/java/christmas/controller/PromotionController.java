@@ -7,7 +7,7 @@ import christmas.domain.Order;
 import christmas.domain.event.Event;
 import christmas.dto.DiscountAmount;
 import christmas.dto.MenuCount;
-import christmas.exception.PlannerException;
+import christmas.exception.PromotionException;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 import christmas.view.Parser;
@@ -31,7 +31,7 @@ public class PromotionController {
             try {
                 Menus menus = askMenus();
                 return new Order(date, menus);
-            } catch (PlannerException e) {
+            } catch (PromotionException e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -41,7 +41,7 @@ public class PromotionController {
         while (true) {
             try {
                 return new Date(inputView.readVisitDate());
-            } catch (PlannerException e) {
+            } catch (PromotionException e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -56,7 +56,7 @@ public class PromotionController {
                         .map(menu -> Parser.parseMenu(menu, "-"))
                         .forEach(menuCount -> menus.add(menuCount.menu(), menuCount.count()));
                 return menus;
-            } catch (PlannerException e) {
+            } catch (PromotionException e) {
                 System.out.println(e.getMessage());
             }
         }

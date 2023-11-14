@@ -8,7 +8,7 @@ import christmas.dto.MenuCount;
 import christmas.domain.event.Event;
 import christmas.domain.menu.Menu;
 import christmas.exception.ErrorMessage;
-import christmas.exception.PlannerException;
+import christmas.exception.PromotionException;
 import java.util.Map;
 import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
@@ -36,7 +36,7 @@ class OrderTest {
         menus.add(("레드와인"), 7);
 
         assertThatThrownBy(() -> new Order(new Date(1), menus))
-                .isInstanceOf(PlannerException.class)
+                .isInstanceOf(PromotionException.class)
                 .hasMessage(ErrorMessage.INVALID_ORDER_MESSAGE.message());
     }
 

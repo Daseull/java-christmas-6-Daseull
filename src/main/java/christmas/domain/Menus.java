@@ -4,7 +4,7 @@ import christmas.Constant;
 import christmas.domain.menu.Category;
 import christmas.domain.menu.Menu;
 import christmas.exception.ErrorMessage;
-import christmas.exception.PlannerException;
+import christmas.exception.PromotionException;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -55,24 +55,24 @@ public class Menus {
         if (Menu.exists(menu)) {
             return;
         }
-        throw new PlannerException(ErrorMessage.INVALID_ORDER_MESSAGE);
+        throw new PromotionException(ErrorMessage.INVALID_ORDER_MESSAGE);
     }
 
     private void validateCount(int count) {
         if (count < Constant.MIN_MENU_COUNT) {
-            throw new PlannerException(ErrorMessage.INVALID_ORDER_MESSAGE);
+            throw new PromotionException(ErrorMessage.INVALID_ORDER_MESSAGE);
         }
     }
 
     private void validateMenuNotDuplicated(String menu) {
         if (menus.containsKey(Menu.fromDescription(menu))) {
-            throw new PlannerException(ErrorMessage.INVALID_ORDER_MESSAGE);
+            throw new PromotionException(ErrorMessage.INVALID_ORDER_MESSAGE);
         }
     }
 
     private void validateTotalCount(int count) {
         if (totalCount() + count > Constant.MAX_ORDER_COUNT) {
-            throw new PlannerException(ErrorMessage.INVALID_ORDER_MESSAGE);
+            throw new PromotionException(ErrorMessage.INVALID_ORDER_MESSAGE);
         }
     }
 }

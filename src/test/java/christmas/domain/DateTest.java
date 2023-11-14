@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import christmas.Constant;
 import christmas.exception.ErrorMessage;
-import christmas.exception.PlannerException;
+import christmas.exception.PromotionException;
 import java.time.DayOfWeek;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -30,7 +30,7 @@ class DateTest {
     @ValueSource(ints = {0, 32})
     void createOutRange(int date) {
         assertThatThrownBy(() -> new Date(date))
-                .isInstanceOf(PlannerException.class)
+                .isInstanceOf(PromotionException.class)
                 .hasMessage(ErrorMessage.INVALID_DATE_MESSAGE.message());
     }
 

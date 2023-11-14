@@ -2,7 +2,7 @@ package christmas.domain;
 
 import christmas.Constant;
 import christmas.exception.ErrorMessage;
-import christmas.exception.PlannerException;
+import christmas.exception.PromotionException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
@@ -17,7 +17,7 @@ public class Date {
 
     private void validate(int date) {
         if (date < Constant.MIN_DATE || date > Constant.MAX_DATE) {
-            throw new PlannerException(ErrorMessage.INVALID_DATE_MESSAGE);
+            throw new PromotionException(ErrorMessage.INVALID_DATE_MESSAGE);
         }
     }
 
