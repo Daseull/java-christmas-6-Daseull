@@ -15,12 +15,14 @@ import java.util.Map;
 public class PromotionController {
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
+    private Date date;
+    private Order order;
 
     public void run() {
-        Date date = askVisitDate();
-        Order order = askMenus();
-        showPlan(date, order);
-        showBadge(date, order);
+        date = askVisitDate();
+        order = askMenus();
+        showPlan();
+        showBadge();
     }
 
     private Date askVisitDate() {
@@ -51,30 +53,30 @@ public class PromotionController {
         return new Order(orderMenu.getOrderMenu());
     }
 
-    private void showPlan(Date date, Order order) {
+    private void showPlan() {
         outputView.printPlanHeader();
-        showOrder(order);
-        showTotalAmount(order);
-        showGiveaway(date, order);
-        showBenefitDetails(date, order);
-        showTotalBenefit(date, order);
-        showFinalAmount(date, order);
+        showOrder();
+        showTotalAmount();
+        showGiveaway();
+        showBenefitDetails();
+        showTotalBenefit();
+        showFinalAmount();
     }
 
-    private void showTotalAmount(Order order) {
+    private void showTotalAmount() {
         outputView.printTotalAmount(order.totalPrice());
     }
 
-    private void showOrder(Order order) {
-        List<MenuCount> menuCounts = toMenuCount(order);
+    private void showOrder() {
+        List<MenuCount> menuCounts = toMenuCount();
         outputView.printOrder(menuCounts);
     }
 
-    private void showGiveaway(Date date, Order order) {
+    private void showGiveaway() {
         outputView.printGiveaway(Event.giveGiveaway(date, order));
     }
 
-    private void showBenefitDetails(Date date, Order order) {
+    private void showBenefitDetails() {
         Map<Event, Integer> details = Event.benefitDetails(date, order);
 
         List<DiscountAmount> discountAmounts = details.entrySet().stream()
@@ -83,24 +85,24 @@ public class PromotionController {
         outputView.printBenefitDetails(discountAmounts);
     }
 
-    private void showTotalBenefit(Date date, Order order) {
+    private void showTotalBenefit() {
         int totalBenefit = Event.totalBenefit(date, order);
         outputView.printTotalBenefit(totalBenefit);
     }
 
-    private void showFinalAmount(Date date, Order order) {
+    private void showFinalAmount() {
         int discountAmount = Event.totalDiscount(date, order);
         outputView.printFinalAmount(order.totalPrice() + discountAmount);
     }
 
-    private List<MenuCount> toMenuCount(Order order) {
+    private List<MenuCount> toMenuCount() {
         return order.getOrderMenu().entrySet()
                 .stream()
                 .map(entry -> new MenuCount(entry.getKey().description(), entry.getValue()))
                 .toList();
     }
 
-    private void showBadge(Date date, Order order) {
+    private void showBadge() {
         Badge badge = Badge.fromBenefit(Event.totalBenefit(date, order));
         outputView.printBadge(badge.displayName());
     }
