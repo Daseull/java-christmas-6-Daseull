@@ -49,6 +49,11 @@ public class OutputView {
         printAmount(finalAMount);
     }
 
+    public void printBadge(String displayName) {
+        System.out.println("\n<12월 이벤트 배지>");
+        System.out.println(displayName);
+    }
+
     private void printNone() {
         System.out.println("없음");
     }

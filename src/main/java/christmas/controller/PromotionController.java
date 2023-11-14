@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.domain.Badge;
 import christmas.domain.Date;
 import christmas.domain.Order;
 import christmas.domain.OrderMenu;
@@ -19,6 +20,7 @@ public class PromotionController {
         Date date = askVisitDate();
         Order order = askMenus();
         showPlan(date, order);
+        showBadge(date, order);
     }
 
     private Date askVisitDate() {
@@ -59,7 +61,7 @@ public class PromotionController {
         showFinalAmount(date, order);
     }
 
-    private void showTotalAmount(Order order){
+    private void showTotalAmount(Order order) {
         outputView.printTotalAmount(order.totalPrice());
     }
 
@@ -96,5 +98,10 @@ public class PromotionController {
                 .stream()
                 .map(entry -> new MenuCount(entry.getKey().description(), entry.getValue()))
                 .toList();
+    }
+
+    private void showBadge(Date date, Order order) {
+        Badge badge = Badge.fromBenefit(Event.totalBenefit(date, order));
+        outputView.printBadge(badge.displayName());
     }
 }
