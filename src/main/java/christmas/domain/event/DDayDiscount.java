@@ -19,6 +19,6 @@ public class DDayDiscount implements EventPolicy {
         if (canBeApplied(date, menus)) {
             return BOTTOM_DISCOUNT_AMOUNT + date.dayFromDate(FIRST_DATE) * DISCOUNT_UNIT;
         }
-        return 0;
+        return NONE;
     }
 }

@@ -25,7 +25,7 @@ public class WeekdayDiscount implements EventPolicy {
         if (canBeApplied(date, menus)) {
             return menus.countByCategory(Category.DESSERT) * DISCOUNT_UNIT;
         }
-        return 0;
+        return NONE;
     }
 
     private boolean isWeekday(DayOfWeek dayOfWeek) {

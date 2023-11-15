@@ -22,7 +22,7 @@ public class WeekendDiscount implements EventPolicy {
         if (canBeApplied(date, menus)) {
             return menus.countByCategory(Category.MAIN) * DISCOUNT_UNIT;
         }
-        return 0;
+        return NONE;
     }
 
     private boolean isWeekend(DayOfWeek dayOfWeek) {

@@ -21,7 +21,7 @@ public class Giveaway implements EventPolicy {
         if (canBeApplied(date, menus)) {
             return -1 * numGiveaway * giveaway.price();
         }
-        return 0;
+        return NONE;
     }
 
     public Optional<MenuCount> giveGiveaway(Date date, Menus menus) {

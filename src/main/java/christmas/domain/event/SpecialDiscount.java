@@ -18,7 +18,7 @@ public class SpecialDiscount implements EventPolicy {
         if (canBeApplied(date, menus)) {
             return DISCOUNT_UNIT;
         }
-        return 0;
+        return NONE;
     }
 
     private boolean isStarredDate(Date date) {

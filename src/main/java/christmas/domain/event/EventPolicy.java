@@ -5,6 +5,8 @@ import christmas.domain.Menus;
 
 public interface EventPolicy {
     int MIN_TOTAL_AMOUNT = 10_000;
+    int NONE = 0;
+
 
     default boolean isApplicableMenus(Menus menus) {
         return menus.totalAmount() >= MIN_TOTAL_AMOUNT;
