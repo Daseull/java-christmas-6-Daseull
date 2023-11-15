@@ -1,5 +1,8 @@
 package christmas.domain.event;
 
+import christmas.domain.Date;
+import christmas.domain.Menus;
+
 public enum Event {
     D_DAY_DISCOUNT(new DDayDiscount(), "크리스마스 디데이 할인"),
     WEEKDAY_DISCOUNT(new WeekdayDiscount(), "평일 할인"),
@@ -21,5 +24,9 @@ public enum Event {
 
     public EventPolicy policy() {
         return policy;
+    }
+
+    public int benefitAmount(Date date, Menus menus) {
+        return policy.amount(date, menus);
     }
 }

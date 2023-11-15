@@ -50,21 +50,21 @@ public class Order {
 
     public Map<Event, Integer> benefitDetails() {
         return Arrays.stream(Event.values())
-                .map(event -> new SimpleEntry<>(event, event.policy().amount(date, menus)))
+                .map(event -> new SimpleEntry<>(event, event.benefitAmount(date, menus)))
                 .filter(entry -> entry.getValue() < 0)
                 .collect(Collectors.toMap(Entry::getKey, Entry::getValue, (x, y) -> y, LinkedHashMap::new));
     }
 
     public int totalBenefit() {
         return Arrays.stream(Event.values())
-                .mapToInt(event -> event.policy().amount(date, menus))
+                .mapToInt(event -> event.benefitAmount(date, menus))
                 .sum();
     }
 
     public int totalDiscount() {
         return Arrays.stream(Event.values())
                 .filter(event -> event != Event.GIVEAWAY)
-                .mapToInt(event -> event.policy().amount(date, menus))
+                .mapToInt(event -> event.benefitAmount(date, menus))
                 .sum();
     }
 
