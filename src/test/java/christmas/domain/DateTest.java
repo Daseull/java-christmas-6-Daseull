@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-import christmas.Constant;
 import christmas.exception.ErrorMessage;
 import christmas.exception.PromotionException;
 import java.time.DayOfWeek;
@@ -21,7 +20,7 @@ class DateTest {
     @DisplayName("날짜 도메인 생성 테스트")
     @Test
     void create() {
-        IntStream.range(Constant.MIN_DATE, Constant.MAX_DATE + 1)
+        IntStream.range(1, 32)
                 .forEach(date -> assertDoesNotThrow(() -> new Date(date)));
     }
 

@@ -1,6 +1,5 @@
 package christmas.domain;
 
-import christmas.Constant;
 import christmas.domain.menu.Category;
 import christmas.domain.menu.Menu;
 import christmas.exception.ErrorMessage;
@@ -10,6 +9,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class Menus {
+    public static final int MIN_MENU_COUNT = 1;
+    public static final int MAX_ORDER_COUNT = 20;
     private final Map<Menu, Integer> menus = new EnumMap<>(Menu.class);
 
     public Map<Menu, Integer> getMenus() {
@@ -65,7 +66,7 @@ public class Menus {
     }
 
     private void validateCount(int count) {
-        if (count < Constant.MIN_MENU_COUNT) {
+        if (count < MIN_MENU_COUNT) {
             throw new PromotionException(ErrorMessage.INVALID_ORDER_MESSAGE);
         }
     }
@@ -77,7 +78,7 @@ public class Menus {
     }
 
     private void validateTotalCount(int count) {
-        if (totalCount() + count > Constant.MAX_ORDER_COUNT) {
+        if (totalCount() + count > MAX_ORDER_COUNT) {
             throw new PromotionException(ErrorMessage.INVALID_ORDER_MESSAGE);
         }
     }

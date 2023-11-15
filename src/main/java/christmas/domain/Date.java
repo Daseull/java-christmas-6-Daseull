@@ -1,6 +1,5 @@
 package christmas.domain;
 
-import christmas.Constant;
 import christmas.exception.ErrorMessage;
 import christmas.exception.PromotionException;
 import java.time.DayOfWeek;
@@ -10,6 +9,8 @@ import java.util.List;
 public class Date {
     public static final int EVENT_YEAR = 2023;
     public static final int EVENT_MONTH = 12;
+    public static final int MIN_DATE = 1;
+    public static final int MAX_DATE = 31;
     private final int date;
 
     public Date(int date) {
@@ -22,7 +23,7 @@ public class Date {
     }
 
     private void validate(int date) {
-        if (date < Constant.MIN_DATE || date > Constant.MAX_DATE) {
+        if (date < MIN_DATE || date > MAX_DATE) {
             throw new PromotionException(ErrorMessage.INVALID_DATE_MESSAGE);
         }
     }
