@@ -19,7 +19,7 @@ public class OutputView {
 
     public void printTotalAmount(int amount) {
         System.out.println("\n<할인 전 총주문 금액>");
-        System.out.printf("%,d원\n", amount);
+        printAmount(amount);
     }
 
     public void printGiveaway(Optional<MenuCount> giveaway) {
