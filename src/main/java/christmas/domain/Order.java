@@ -25,6 +25,10 @@ public class Order {
         this.menus = menus;
     }
 
+    public int getDate() {
+        return date.getDate();
+    }
+
     public Map<Menu, Integer> getOrderMenu() {
         return menus.getMenus();
     }

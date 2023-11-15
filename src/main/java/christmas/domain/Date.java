@@ -8,11 +8,17 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Date {
-    private int date;
+    public static final int EVENT_YEAR = 2023;
+    public static final int EVENT_MONTH = 12;
+    private final int date;
 
     public Date(int date) {
         validate(date);
         this.date = date;
+    }
+
+    public int getDate() {
+        return date;
     }
 
     private void validate(int date) {
@@ -26,7 +32,7 @@ public class Date {
     }
 
     public DayOfWeek dayOfWeek() {
-        return LocalDate.of(Constant.EVENT_YEAR, Constant.EVENT_MONTH, date).getDayOfWeek();
+        return LocalDate.of(EVENT_YEAR, EVENT_MONTH, date).getDayOfWeek();
     }
 
     public boolean isIncluded(List<Integer> dates) {

@@ -63,7 +63,7 @@ public class PromotionController {
     }
 
     private void showPlan() {
-        outputView.printPlanHeader();
+        outputView.printPlanHeader(order.getDate());
         showOrder();
         showTotalAmount();
         showGiveaway();
