@@ -2,6 +2,7 @@ package christmas.view;
 
 import christmas.dto.DiscountAmount;
 import christmas.dto.MenuCount;
+import christmas.exception.PromotionException;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,6 +54,11 @@ public class OutputView {
         System.out.println("\n<12월 이벤트 배지>");
         System.out.println(displayName);
     }
+
+    public void printErrorMessage(PromotionException e){
+        System.out.println(e.getMessage());
+    }
+
 
     private void printNone() {
         System.out.println("없음");

@@ -31,7 +31,7 @@ public class PromotionController {
                 Menus menus = askMenus();
                 return new Order(date, menus);
             } catch (PromotionException e) {
-                System.out.println(e.getMessage());
+                outputView.printErrorMessage(e);
             }
         }
     }
@@ -41,7 +41,7 @@ public class PromotionController {
             try {
                 return new Date(inputView.readVisitDate());
             } catch (PromotionException e) {
-                System.out.println(e.getMessage());
+                outputView.printErrorMessage(e);
             }
         }
     }
@@ -56,7 +56,7 @@ public class PromotionController {
                         .forEach(menuCount -> menus.add(menuCount.menu(), menuCount.count()));
                 return menus;
             } catch (PromotionException e) {
-                System.out.println(e.getMessage());
+                outputView.printErrorMessage(e);
             }
         }
     }
