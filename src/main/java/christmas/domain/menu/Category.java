@@ -1,5 +1,5 @@
 package christmas.domain.menu;
 
 public enum Category {
-    APPETIZER, MAIN, DESSERT, BEVERAGE;
+    APPETIZER, MAIN, DESSERT, BEVERAGE
 }

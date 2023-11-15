@@ -34,7 +34,7 @@ public class Order {
     }
 
     private void validateCategory(Menus menus) {
-        if(menus.isAllInCategory(Category.BEVERAGE)){
+        if (menus.isAllInCategory(Category.BEVERAGE)) {
             throw new PromotionException(ErrorMessage.INVALID_ORDER_MESSAGE);
         }
     }

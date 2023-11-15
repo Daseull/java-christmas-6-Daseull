@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.domain.Date;
 import christmas.domain.Menus;
-import christmas.domain.Order;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

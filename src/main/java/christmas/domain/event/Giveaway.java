@@ -6,7 +6,6 @@ import christmas.domain.menu.Menu;
 import christmas.dto.MenuCount;
 import java.util.Optional;
 
-
 public class Giveaway implements EventPolicy {
     private static final int MIN_TOTAL_AMOUNT = 120_000; //shadowing
     private static final Menu giveaway = Menu.CHAMPAGNE;

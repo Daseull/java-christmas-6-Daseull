@@ -55,7 +55,7 @@ public class OutputView {
         System.out.println(displayName);
     }
 
-    public void printErrorMessage(PromotionException e){
+    public void printErrorMessage(PromotionException e) {
         System.out.println(e.getMessage());
     }
 

@@ -36,7 +36,7 @@ public class Menus {
     }
 
     public int countByCategory(Category category) {
-        return (int) menus.keySet().stream()
+        return menus.keySet().stream()
                 .filter(key -> category.equals(key.category()))
                 .mapToInt(menus::get)
                 .sum();
