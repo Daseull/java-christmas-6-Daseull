@@ -69,6 +69,6 @@ public class Order {
     }
 
     public int finalAmount() {
-        return totalAmount() - totalDiscount();
+        return totalAmount() + totalDiscount();
     }
 }

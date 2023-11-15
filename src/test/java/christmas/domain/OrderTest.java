@@ -95,4 +95,18 @@ class OrderTest {
 
         assertThat(order.totalBenefit()).isEqualTo(expectedAmount);
     }
+
+    @DisplayName("최종 결제 금액은 총주문 금액과 할인 금액을 합친 금액이다.")
+    @ParameterizedTest
+    @CsvSource(value = {"25,2,3,114531", "1,4,1,215908"})
+    void finalAmount(int dateSource, int numMain, int numDessert, int expectedAmount) {
+        Date date = new Date(dateSource);
+        Menus menus = new Menus();
+        menus.add(("티본스테이크"), numMain);
+        menus.add(("아이스크림"), numDessert);
+
+        Order order = new Order(date, menus);
+
+        assertThat(order.finalAmount()).isEqualTo(expectedAmount);
+    }
 }

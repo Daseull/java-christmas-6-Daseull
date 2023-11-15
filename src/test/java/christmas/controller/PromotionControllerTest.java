@@ -52,6 +52,23 @@ class PromotionControllerTest extends NsTest {
         });
     }
 
+    @Test
+    void 금액_출력() {
+        assertSimpleTest(() -> {
+            run("3", "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+            assertThat(output()).contains(
+                    "<할인 전 총주문 금액>" + LINE_SEPARATOR + "142,000원",
+                    "<증정 메뉴>" + LINE_SEPARATOR + "샴페인 1개",
+                    "크리스마스 디데이 할인: -1,200원",
+                    "평일 할인: -4,046원",
+                    "특별 할인: -1,000원",
+                    "증정 이벤트: -25,000원",
+                    "<할인 후 예상 결제 금액>" + LINE_SEPARATOR + "135,754원"
+            );
+        });
+    }
+
+
     @ParameterizedTest
     @ValueSource(strings = {"a", "0", "32", " "})
     void 날짜_예외_테스트(String date) {
