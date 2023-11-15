@@ -1,7 +1,7 @@
 package christmas.view;
 
-import static christmas.view.Parser.parseDate;
-import static christmas.view.Parser.parseMenus;
+import static christmas.controller.Parser.parseDate;
+import static christmas.controller.Parser.parseMenus;
 
 import camp.nextstep.edu.missionutils.Console;
 import christmas.exception.ErrorMessage;

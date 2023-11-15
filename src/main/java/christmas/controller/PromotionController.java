@@ -10,7 +10,6 @@ import christmas.dto.MenuCount;
 import christmas.exception.PromotionException;
 import christmas.view.InputView;
 import christmas.view.OutputView;
-import christmas.view.Parser;
 import java.util.List;
 import java.util.Map;
 
